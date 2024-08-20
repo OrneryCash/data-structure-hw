@@ -5,7 +5,7 @@ public class Queue { //create a class queue that implement circular array
     int back;
     int size;
     
-    public Queue(int cap){ //create constructor that create array that has capacity as input 
+    public Queue(int cap){ //create constructor that create array for queue that has capacity as input 
         this.arr = new Node[cap]; 
         this.capacity = cap;
         this.front = 0;
@@ -36,9 +36,9 @@ public class Queue { //create a class queue that implement circular array
                 front = 0; //set front into index 0 of array
             }
             size--; //decrease size
-            return tmp; //return tmp 
+            return tmp; //return node that pop
             
-        }else{ //if queue is empty print Queue Underflow
+        }else{ //if queue is empty, then print Queue Underflow
             System.out.println("Queue Underflow!!!");
         }
         return null; // fix this (out of place)
@@ -67,7 +67,7 @@ public class Queue { //create a class queue that implement circular array
                 }
             }
             System.out.println("[Back]");
-        }else{ //if queue is empty print Empty Queue
+        }else{ //if queue is empty, then print Empty Queue
             System.out.println("Empty Queue!!!");
         }
     }
