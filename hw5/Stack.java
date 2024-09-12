@@ -1,4 +1,4 @@
-public class Stack { //create class stack 
+public class Stack { //create stack class
     Node[] arr; // regular array
     int capacity;
     int size;
