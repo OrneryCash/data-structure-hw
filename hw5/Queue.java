@@ -1,4 +1,4 @@
-public class Queue { //create a class queue that implement circular array
+public class Queue { //create a queue class that implement circular array
     Node[] arr; // circular array
     int capacity;
     int front;
