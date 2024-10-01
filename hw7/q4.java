@@ -240,10 +240,10 @@ public class AVLTree extends BTreePrinter{
             deleteKey(tree, minr); // Recursively delete the minimum node
         }
         
-        Node parent = node.parent;
+        Node parent = node.parent; // Start rebalancing from the parent of the deleted node
         while (parent != null) {
-            rebalance(tree, parent);
-            parent = parent.parent;
+            rebalance(tree, parent); // Rebalance the parent node
+            parent = parent.parent; // Move up the tree to continue rebalancing ancestors
         }
     }
     
