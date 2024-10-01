@@ -2,103 +2,120 @@ public class BSTree extends BTreePrinter{
     Node root;
       
     public void doubleRotateFromLeft(Node y) {
-        // Do something
-        if (y == null) return;
-        Node beRotated = y.left;
-        if (beRotated != null) {
-          Node parent = y.parent;
-          Node child = beRotated.right;
-          
-          Node childLeft = child.left;
-          Node childRight = child.right;
-          
-          child.left = beRotated;
-          beRotated.parent = child;
-          
-          beRotated.right = childLeft;
-          if (childLeft != null) {
-              childLeft.parent = beRotated;
-          }
-          
-          y.left = child;
-          child.parent = y;
-          
-          
-          child.right = y;
-          y.left = childRight;
-          
-          y.parent = child;
-          if (childRight != null) {
-              childRight.parent = y;
-          }
-          
-          if (parent != null) {
-              if (beRotated.key > parent.key) {
-                  parent.right = child;
-              } else {
-                  parent.left = child;
-              }
-              child.parent = parent;
-          } else {
-              root = child;
-              child.parent = null;
-          }
+    // Check if the input node y is null. If it is, exit the method.
+    if (y == null) return;
+
+    // Get the left child of y, which will be involved in the rotation.
+    Node beRotated = y.left;
+
+    // Check if beRotated is not null.
+    if (beRotated != null) {
+        // Store the parent of y in a variable.
+        Node parent = y.parent;
+
+        // Get the right child of beRotated, which will be the new child after rotation.
+        Node child = beRotated.right;
+
+        // Store the left and right children of the child node.
+        Node childLeft = child.left;
+        Node childRight = child.right;
+
+        // Perform the first rotation: make child the left child of y.
+        child.left = beRotated;
+        beRotated.parent = child;
+
+        // Update the right child of beRotated to be its original left child.
+        beRotated.right = childLeft;
+        if (childLeft != null) {
+            childLeft.parent = beRotated; // Update the parent of childLeft to be beRotated.
+        }
+
+        // Update y's left child to be the child node.
+        y.left = child;
+        child.parent = y; // Set the parent of child to y.
+
+        // Now perform the second rotation: make child the new parent of y.
+        child.right = y;
+        y.left = childRight; // Set y's left child to childRight.
+
+        y.parent = child; // Set the parent of y to child.
+        if (childRight != null) {
+            childRight.parent = y; // Update the parent of childRight to y.
+        }
+
+        // If y has a parent, determine the position of child relative to its parent.
+        if (parent != null) {
+            // If beRotated is greater than its parent, child becomes the right child of parent.
+            if (beRotated.key > parent.key) {
+                parent.right = child;
+            } else { // Otherwise, it becomes the left child.
+                parent.left = child;
+            }
+            child.parent = parent; // Set the parent of child to its new parent.
+        } else { // Otherwise update the root to child.
+            root = child;
+            child.parent = null; // Set the parent of child to null.
         }
     }
+}
 
     public void doubleRotateFromRight(Node y) {
-        // Do something
-        if (y == null) return;
-        Node beRotated = y.right;
-        if (beRotated != null) {
-          Node parent = y.parent;
-          Node child = beRotated.left;
-          
-          Node childLeft = child.left;
-          Node childRight = child.right;
-          
-          child.right = beRotated;
-          beRotated.parent = child;
-          
-          beRotated.left = childRight;
-          if (childRight != null) {
-              childRight.parent = beRotated;
-          }
-          
-          y.right = child;
-          child.parent = y;
-          
-          
-          child.left = y;
-          y.right = childLeft;
-          
-          y.parent = child;
-          if (childLeft != null) {
-              childLeft.parent = y;
-          }
-          
-          if (parent != null) {
-              if (beRotated.key > parent.key) {
-                  parent.right = child;
-              } else {
-                  parent.left = child;
-              }
-              child.parent = parent;
-          } else {
-              root = child;
-              child.parent = null;
-          }
-        }
-        
-    }
+    // Check if the input node y is null. If it is, exit the method.
+    if (y == null) return;
     
-    public void insertKey(int key) {
-        if (root == null) {
-            root = new Node(key);
-        } else {
-            Main.insertKey(root, key);
+    // Get the right child of y, which will be involved in the rotation.
+    Node beRotated = y.right;
+    
+    // Check if beRotated is not null.
+    if (beRotated != null) {
+        // Store the parent of y in a variable.
+        Node parent = y.parent;
+        
+        // Get the left child of beRotated, which will be the new child after rotation.
+        Node child = beRotated.left;
+
+        // Store the left and right children of the child node.
+        Node childLeft = child.left;
+        Node childRight = child.right;
+
+        // Perform the first rotation: make child the right child of y.
+        child.right = beRotated; // Set the right child of child to beRotated.
+        beRotated.parent = child; // Update the parent of beRotated to child.
+
+        // Update the left child of beRotated to be childRight.
+        beRotated.left = childRight; 
+        if (childRight != null) {
+            childRight.parent = beRotated; // Update the parent of childRight to beRotated.
+        }
+
+        // Update y's right child to be the child node.
+        y.right = child; 
+        child.parent = y; // Set the parent of child to y.
+
+        // Now perform the second rotation: make child the new parent of y.
+        child.left = y; // Set the left child of child to y.
+        y.right = childLeft; // Set y's right child to childLeft.
+
+        y.parent = child; // Set the parent of y to child.
+        if (childLeft != null) {
+            childLeft.parent = y; // Update the parent of childLeft to y.
+        }
+
+        // If y has a parent, determine the position of child relative to its parent.
+        if (parent != null) {
+            // If beRotated is greater than its parent, child becomes the right child of parent.
+            if (beRotated.key > parent.key) {
+                parent.right = child;
+            } else { // Otherwise, it becomes the left child.
+                parent.left = child;
+            }
+            child.parent = parent; // Set the parent of child to its new parent.
+        } else {  // Otherwise update the root to child.
+            root = child;
+            child.parent = null; // Set the parent of child to null.
         }
     }
+}
     
     public void printTree() {
         if (root == null) {
