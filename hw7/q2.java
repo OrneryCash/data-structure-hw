@@ -5,7 +5,7 @@ public class BSTree extends BTreePrinter{
     // Check if the input node y is null. If it is, exit the method.
     if (y == null) return;
 
-    // Get the left child of y, which will be involved in the rotation.
+    // Give beRotated get the left child of y.
     Node beRotated = y.left;
 
     // Check if beRotated is not null.
@@ -63,7 +63,7 @@ public class BSTree extends BTreePrinter{
     // Check if the input node y is null. If it is, exit the method.
     if (y == null) return;
     
-    // Get the right child of y, which will be involved in the rotation.
+    // Give beRotated get the right child of y.
     Node beRotated = y.right;
     
     // Check if beRotated is not null.
