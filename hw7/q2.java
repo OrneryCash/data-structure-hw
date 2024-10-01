@@ -10,7 +10,7 @@ public class BSTree extends BTreePrinter{
 
     // Check if beRotated is not null.
     if (beRotated != null) {
-        // Store the parent of y in a variable.
+        // Store the parent of y in a parent.
         Node parent = y.parent;
 
         // Get the right child of beRotated, which will be the new child after rotation.
@@ -20,9 +20,9 @@ public class BSTree extends BTreePrinter{
         Node childLeft = child.left;
         Node childRight = child.right;
 
-        // Perform the first rotation: make child the left child of y.
-        child.left = beRotated;
-        beRotated.parent = child;
+        
+        child.left = beRotated; // Set the left child of child to beRotated.
+        beRotated.parent = child; // Update the parent of beRotated to child.
 
         // Update the right child of beRotated to be its original left child.
         beRotated.right = childLeft;
@@ -34,7 +34,6 @@ public class BSTree extends BTreePrinter{
         y.left = child;
         child.parent = y; // Set the parent of child to y.
 
-        // Now perform the second rotation: make child the new parent of y.
         child.right = y;
         y.left = childRight; // Set y's left child to childRight.
 
@@ -68,7 +67,7 @@ public class BSTree extends BTreePrinter{
     
     // Check if beRotated is not null.
     if (beRotated != null) {
-        // Store the parent of y in a variable.
+        // Store the parent of y in a parent.
         Node parent = y.parent;
         
         // Get the left child of beRotated, which will be the new child after rotation.
@@ -78,7 +77,6 @@ public class BSTree extends BTreePrinter{
         Node childLeft = child.left;
         Node childRight = child.right;
 
-        // Perform the first rotation: make child the right child of y.
         child.right = beRotated; // Set the right child of child to beRotated.
         beRotated.parent = child; // Update the parent of beRotated to child.
 
@@ -92,7 +90,6 @@ public class BSTree extends BTreePrinter{
         y.right = child; 
         child.parent = y; // Set the parent of child to y.
 
-        // Now perform the second rotation: make child the new parent of y.
         child.left = y; // Set the left child of child to y.
         y.right = childLeft; // Set y's right child to childLeft.
 
