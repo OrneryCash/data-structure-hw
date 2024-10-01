@@ -127,38 +127,39 @@ public class BSTree extends BTreePrinter{
     }
     
     public static boolean isMergeable(Node r1, Node r2){
-        Node max = findMax(r1);
-        Node min = findMin(r2);
+        Node max = findMax(r1); // Find the maximum node in the first tree (r1)
+        Node min = findMin(r2); // Find the minimum node in the second tree (r2)
         
-        if (max == null || min == null) return true;
-        if (max.key < min.key) return true;
-        return false;
+        if (max == null || min == null) return true; // If either max or min is null, the trees are considered mergeable
+        if (max.key < min.key) return true; // If the maximum of the first tree is less than the minimum of the second tree, they are mergeable
+        return false;  // Otherwise, the trees are not mergeable
     }
 
     public static Node mergeWithRoot(Node r1, Node r2, Node t){
-        if (isMergeable(r1, r2)) {
+        if (isMergeable(r1, r2)) { // Check if the two trees r1 and r2 are mergeable based on their key values
             // Fix this
-            t.left = r1;
-            t.right = r2;
-            
+            t.left = r1; // Assign the left child of node t to be r1
+            t.right = r2; // Assign the right child of node t to be r2
+
+            // Update the parent references for both r1 and r2
             r1.parent = t;
             r2.parent = t;
             
-            return t;
+            return t;  // Return the new root node t after merging
             
         } else {
-            System.out.println("All nodes in T1 must be smaller than all nodes from T2");
-            return null;
+            System.out.println("All nodes in T1 must be smaller than all nodes from T2"); // Print an error message if the trees are not mergeable
+            return null; // Return null when the merge cannot happen
         }
     }
     
     public void merge(BSTree tree2){
-        if (isMergeable(this.root, tree2.root)){
-            Node t = findMax(this.root);
-            deleteKey(t.key);
-            root = mergeWithRoot(this.root, tree2.root, t);
+        if (isMergeable(this.root, tree2.root)){  // Check if the two trees can be merged
+            Node t = findMax(this.root); // Find the maximum node in the current tree (this tree)
+            deleteKey(t.key); // Delete the maximum node from the current tree
+            root = mergeWithRoot(this.root, tree2.root, t); // Merge the two trees with t as the new root and update the root of this tree
         }else{
-            System.out.println("All nodes in T1 must be smaller than all nodes from T2");
+            System.out.println("All nodes in T1 must be smaller than all nodes from T2"); // Print an error message if the trees are not mergeable
         }
     }
 
