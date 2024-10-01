@@ -366,10 +366,10 @@ public class AVLTree extends BTreePrinter{
 
     // This function is complete, no need to edit
     public static int height(Node node){
-        if (node == null)
+        if (node == null) //If the node is null, return -1
             return -1;
-        else
-            return 1 + Math.max(height(node.left), height(node.right));
+        else // Recursively calculate the height of the left and right subtrees
+            return 1 + Math.max(height(node.left), height(node.right)); // The height of the current node is 1 plus the maximum of the heights of the left and right children
     }
 
     // This function is complete, no need to edit
