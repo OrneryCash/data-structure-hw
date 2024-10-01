@@ -39,9 +39,9 @@ public class BSTree extends BTreePrinter{
             // Set the parent of beRotated to its new parent.
             beRotated.parent = parent; 
         } else { 
-            // If y has no parent, it was the root, so update the root.
+            // Otherwise update the root to beRotated.
             root = beRotated; 
-            beRotated.parent = null; // Set the parent of beRotated to null since it's now the root.
+            beRotated.parent = null; // Set the parent of beRotated to null.
         }
     }
   }
@@ -84,9 +84,9 @@ public class BSTree extends BTreePrinter{
             // Set the parent of beRotated to its new parent.
             beRotated.parent = parent; 
         } else { 
-            // If y has no parent, it was the root, so update the root.
+            // Otherwise update the root to beRotated.
             root = beRotated; 
-            beRotated.parent = null; // Set the parent of beRotated to null since it's now the root.
+            beRotated.parent = null; // Set the parent of beRotated to null.
         }
     }
   }
