@@ -322,45 +322,44 @@ public class AVLTree extends BTreePrinter{
     }
 
     public static Node mergeWithRoot(Node r1, Node r2, Node t){
-        if (isMergeable(r1, r2)) {
-            // Fix this
+        if (isMergeable(r1, r2)) { // Check if the two trees r1 and r2 can be merged
+            // Calculate the heights of both trees
             int h1 = height(r1);
             int h2 = height(r2);
             
-            if (Math.abs(h1-h2) <= 1) {
-                t.left = r1;
-                r1.parent = t;
+            if (Math.abs(h1-h2) <= 1) { // If the heights differ by at most 1, merge directly with t as the root
+                t.left = r1;  // Assign r1 as the left subtree of t
+                r1.parent = t; // Set the parent of r1 to t
                 
-                t.right = r2;
-                r2.parent = t;
+                t.right = r2; // Assign r2 as the right subtree of t
+                r2.parent = t; // Set the parent of r2 to t
                 
-                return t;
-            } else if (h1 > h2) {
-                Node tmp = mergeWithRoot(r1.right, r2, t);
-                r1.right = tmp;
-                tmp.parent = r1;
-                return r1;
-            } else {
-                Node tmp = mergeWithRoot(r1, r2.left, t);
-                r2.left = tmp;
-                tmp.parent = r2;
-                return r2;
+                return t; // Return t as the new root of the merged tree
+            } else if (h1 > h2) { // If the height of r1 is greater than r2, merge r2 into the right subtree of r1
+                Node tmp = mergeWithRoot(r1.right, r2, t); // Recursively merge r1.right with r2 and t
+                r1.right = tmp; // Set the merged result as the right child of r1
+                tmp.parent = r1; // Update the parent reference of the merged subtree
+                return r1; // Return r1 as the new root after merging
+            } else { // If the height of r2 is greater than r1, merge r1 into the left subtree of r2
+                Node tmp = mergeWithRoot(r1, r2.left, t); // Recursively merge r1 with r2.left and t
+                r2.left = tmp; // Set the merged result as the left child of r2
+                tmp.parent = r2; // Update the parent reference of the merged subtree
+                return r2; // Return r2 as the new root after merging
             }
         } else {
-            System.out.println("All nodes in T1 must be smaller than all nodes from T2");
-            return null;
+            System.out.println("All nodes in T1 must be smaller than all nodes from T2");  // Print an error message if the two trees are not mergeable
+            return null; // Return null to indicate that the merge is not possible
         }
     }
     
     public void merge(AVLTree tree2){
-        if (isMergeable(this.root, tree2.root)){
-            // Do something
-            Node t = findMax(this.root);
-            deleteKey(t.key);
-            this.root = mergeWithRoot(this.root, tree2.root, t);
-            rebalance(this, root);
+        if (isMergeable(this.root, tree2.root)){ // Check if the two trees are mergeable
+            Node t = findMax(this.root); // Find the maximum node in the current tree
+            deleteKey(t.key); // Delete the maximum node from the current tree
+            this.root = mergeWithRoot(this.root, tree2.root, t); // Merge the two trees with t as the new root and update this tree's root
+            rebalance(this, root); // After merging, rebalance the entire tree to maintain AVL tree properties
         }else{
-            System.out.println("All nodes in T1 must be smaller than all nodes from T2");
+            System.out.println("All nodes in T1 must be smaller than all nodes from T2"); // Print an error message if the trees are not mergeable
         }
     }
 
