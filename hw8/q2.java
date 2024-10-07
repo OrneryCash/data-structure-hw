@@ -1,27 +1,27 @@
 public class Heap {
-  private Node[] heap;
-  private int size;
-  private int capacity;
-  private boolean isMinHeap;
-  private String name;
-  private long timer;
+  private Node[] heap; // Array to store the heap nodes
+  private int size; // The current number of nodes in the heap
+  private int capacity; // The maximum number of nodes the heap can hold
+  private boolean isMinHeap; // Flag to determine whether it's a Min-Heap (true/false)
+  private String name; // Name or identifier for the heap
+  private long timer; //long of timer
 
-  public Heap(boolean isMinHeap, int capacity, String name) {
+  public Heap(boolean isMinHeap, int capacity, String name) { //
       // Initialize the heap here
       // Don't forget that we will build the binary heap using...
       // ... the concept of "Complete binary tree based on the heapay implementation"
       // ... The 0 index will not be used, The index starts from 1 (remember?)
       
-      this.heap = new Node[capacity+1];
-      this.size = 1;
-      this.capacity = capacity;
-      this.isMinHeap = isMinHeap;
-      this.name = name;
-      this.timer = 0;
+      this.heap = new Node[capacity+1]; // Create a new array of Nodes with size capacity + 1
+      this.size = 1; // Start with size 1
+      this.capacity = capacity; // Store the maximum capacity of the heap
+      this.isMinHeap = isMinHeap; // Set whether this heap is a Min-Heap (true) or Max-Heap (false)
+      this.name = name; // Assign the provided name to the heap
+      this.timer = 0; //Set timer 0
   }
 
   public Node top(){
-    return heap[1]; // FIX THIS
+    return heap[1]; // Return the top node of the heap, which is at index 1
   }
 
   public void push(Node node){
@@ -39,12 +39,12 @@ public class Heap {
       heap[size] = node;
       int csize = size++;
       
-      while (csize != 1) {
-          if (heap[csize].compare(heap[csize/2], isMinHeap)) {
-              swap(csize, csize/2);
-              csize /= 2;
-          } else {
-              break;
+      while (csize != 1) { // Continue until the node is at the root or no swaps are needed
+          if (heap[csize].compare(heap[csize/2], isMinHeap)) { // If the current node is smaller (for Min-Heap) or larger (for Max-Heap) than its parent
+              swap(csize, csize/2);  //swap them
+              csize /= 2; // Move up to the parent's index
+          } else { //In addition to that
+              break; // Stop 
           }
       }
       
@@ -61,46 +61,46 @@ public class Heap {
       //      * Swap the current node if the priority is lower than child
       //      * Repeat the process until the node has no child or there is no swap (Pls use while loop)
       
-      if (isEmpty()) {
-          System.out.println("The queue is empty");
+      if (isEmpty()) { //If Empty
+          System.out.println("The queue is empty"); //print "The queue is empty"
       }
 
-      Node topp = top();
-      heap[1] = heap[size-1];
-      heap[size--] = null;
+      Node topp = top(); // Store the top node
+      heap[1] = heap[size-1]; // Move the last node to the root position
+      heap[size--] = null; // Decrease the heap size and make it null
       
-      int csize = 1;
-      while (csize * 2 < size || csize * 2 + 1 < size) {
-          int hheap = csize;
+      int csize = 1; // Start csize from the 1
+      while (csize * 2 < size || csize * 2 + 1 < size) { 
+          int hheap = csize; // Initialize hheap to the csize
           
-          if (csize*2 < size) {
-              if (!heap[hheap].compare(heap[csize*2], isMinHeap)) {
-                  hheap = csize*2;
+          if (csize*2 < size) { // Check if there is a left child
+              if (!heap[hheap].compare(heap[csize*2], isMinHeap)) { //If left child has higher priority
+                  hheap = csize*2; // Update hheap
               } 
           }
           
-          if (csize*2+1 < size) {
-              if (!heap[hheap].compare(heap[csize*2+1], isMinHeap)) {
-                  hheap = csize*2+1;
+          if (csize*2+1 < size) { // Check if there is a right child
+              if (!heap[hheap].compare(heap[csize*2+1], isMinHeap)) { //If right child has higher priority
+                  hheap = csize*2+1; // Update hheap
               }
           }
           
-          if (heap[hheap].compare(heap[csize], isMinHeap)) {
-              swap(csize, hheap);
-          } else {
-              break;
+          if (heap[hheap].compare(heap[csize], isMinHeap)) { // If the current node is not in the correct position
+              swap(csize, hheap); //swap it with the higher priority child
+          } else {  //In addition to that
+              break; // Stop
           }
-          csize = hheap;
+          csize = hheap; //Change the of csize let it be hheap
       }
       
-      return topp; // FIX THIS
+      return topp; //Return topp
 
   }
 
-  private void swap(int i, int j) {
-      Node temp = heap[i];
-      heap[i] = heap[j];
-      heap[j] = temp;
+  private void swap(int i, int j) { // Swap the nodes at indices i and j in the heap array
+      Node temp = heap[i]; // Store the node at index i in a temp variable
+      heap[i] = heap[j]; // Move the node at index j to index i
+      heap[j] = temp; // Place the temp node into index j
   }
 
   public void printArray() {
